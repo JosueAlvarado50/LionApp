@@ -21,12 +21,18 @@ const Suppliers = () => {
     const response = await axios.get(`${endpoint}/horas`);
     setHorario(response.data);
     console.log("response get con axios");
-    console.log(response.data);
   };
   const updateMeeting = () => {};
 
   const initialInputChange = () => {
     console.log(initialValueInput.current.value);
+
+    let getElement = [];
+    getElement = horario.find(
+      (horario) => horario.horas === +initialValueInput.current.value
+    );
+    console.log("se encontro el elemento");
+    console.log(getElement.id);
     finalValueInput.current.value = +initialValueInput.current.value + 1;
     setMaxValue(+initialValueInput.current.value + 2);
     setMinValue(+initialValueInput.current.value + 1);
