@@ -28,8 +28,6 @@ const HighlightedQuote = (props) => {
         <label></label>
         <Suppliers></Suppliers>
       </div>
-
-      <button className={classes.blackButton}>Reserve</button>
     </figure>
   );
 };

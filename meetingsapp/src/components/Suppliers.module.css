@@ -42,3 +42,20 @@
   border: 0;
   color: red;
 }
+.blackButton {
+  margin-top: 2%;
+  margin-bottom: 4%;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  font-style: none;
+  height: 40px;
+  width: 110px;
+  margin: 0 60%;
+}
+.blackButton:hover {
+  background-color: rgba(117, 117, 117, 255);
+  border: 0;
+}

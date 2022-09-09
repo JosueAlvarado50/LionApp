@@ -12,6 +12,8 @@ const Suppliers = () => {
   const [minValue, setMinValue] = useState("");
   const initialValueInput = useRef();
   const finalValueInput = useRef();
+  const [horas, setHoras] = useState(0);
+  const [status, setStatus] = useState(1);
 
   useEffect(() => {
     getAllMeetings();
@@ -22,12 +24,11 @@ const Suppliers = () => {
     setHorario(response.data);
     console.log("response get con axios");
   };
-  const updateMeeting = () => {};
 
+  let getElement = [];
   const initialInputChange = () => {
     console.log(initialValueInput.current.value);
 
-    let getElement = [];
     getElement = horario.find(
       (horario) => horario.horas === +initialValueInput.current.value
     );
@@ -43,6 +44,26 @@ const Suppliers = () => {
 
     console.log(enteredInitalDate);
     console.log(enteredFinalDate);
+  };
+  const updateMeeting = async () => {
+    await axios.put(`${endpoint}/hora/13`, {
+      horas: 19,
+      status: 2,
+    });
+    getAllMeetings();
+  };
+  const deleteItem = async (id) => {
+    await axios.delete(`${endpoint}/hora/${id}`);
+    getAllMeetings();
+  };
+
+  const store = async (event) => {
+    event.preventDefault();
+    await axios.post("http://127.0.0.1:8000/api/hora", {
+      horas: 19,
+      status: 1,
+    });
+    getAllMeetings();
   };
 
   return (
@@ -68,6 +89,9 @@ const Suppliers = () => {
           ></input>
         </div>
       </form>
+      <button className={classes.blackButton} onClick={updateMeeting}>
+        Reserve
+      </button>
       <div className={classes.horario}>
         <table>
           <thead>
@@ -84,11 +108,19 @@ const Suppliers = () => {
                 <td>
                   {horario.status === 2 && <button>finalizar sesion</button>}
                 </td>
+                <td>
+                  <button onClick={() => deleteItem(horario.id)}>
+                    eliminar sesion
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <button className={classes.blackButton} onClick={store}>
+        add new
+      </button>
     </div>
   );
 };
