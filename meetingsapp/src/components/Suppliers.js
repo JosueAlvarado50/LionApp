@@ -8,11 +8,12 @@ const Suppliers = () => {
   const [enteredInitalDate, setEnteredInitalDate] = useState("");
   const [enteredFinalDate, setEnteredFinalDate] = useState("");
   const [horario, setHorario] = useState([]);
+
   const [maxValue, setMaxValue] = useState("");
   const [minValue, setMinValue] = useState("");
   const initialValueInput = useRef();
   const finalValueInput = useRef();
-  const [horas, setHoras] = useState(0);
+  const [hora, setHora] = useState([]);
   const [status, setStatus] = useState(1);
 
   useEffect(() => {
@@ -26,12 +27,22 @@ const Suppliers = () => {
   };
 
   let getElement = [];
+  //TODO: cuando se selecciona una hora
   const initialInputChange = () => {
     console.log(initialValueInput.current.value);
+
+    //!validar
 
     getElement = horario.find(
       (horario) => horario.horas === +initialValueInput.current.value
     );
+    setHora(getElement);
+    if (hora) {
+      console.log("tengo el elemento");
+      console.log(hora);
+    } else {
+      console.log("mo se armo");
+    }
     console.log("se encontro el elemento");
     console.log(getElement.id);
     finalValueInput.current.value = +initialValueInput.current.value + 1;
@@ -45,6 +56,13 @@ const Suppliers = () => {
     console.log(enteredInitalDate);
     console.log(enteredFinalDate);
   };
+  const getIdElement = async (id) => {
+    const response = await axios.get(`${endpoint}/horas/${id}`);
+    setHorario(response.data);
+    console.log("response get con axios");
+  };
+
+  //TODO: boton reserve
   const updateMeeting = async () => {
     await axios.put(`${endpoint}/hora/13`, {
       horas: 19,

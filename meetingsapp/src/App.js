@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 import HomePage from "./components/Layout/HomePage";
 import SalaJuntas from "./components/Layout/SalaJuntas";
 import MainNavigation from "./components/MainNavigation";
@@ -26,6 +27,7 @@ function App() {
           element={<QuoteDetail></QuoteDetail>}
         ></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

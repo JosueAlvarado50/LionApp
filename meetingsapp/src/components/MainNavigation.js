@@ -6,11 +6,19 @@ const MainNavigation = () => {
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
-        <img alt="logoLion" src={LogoLion}></img>
+        <img alt="logoLion" src="https://lionintel.com/img/logo_lion.svg"></img>
         <p>Lion Solutions</p>
       </div>
       <nav className={classes.nav}>
         <ul>
+          <li>
+            <NavLink
+              to="/homePage"
+              className={(navData) => (navData.isActive ? classes.active : "")}
+            >
+              home
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="/meeting"
