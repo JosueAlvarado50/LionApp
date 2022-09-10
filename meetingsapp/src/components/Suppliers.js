@@ -66,8 +66,15 @@ const Suppliers = () => {
   //TODO: boton reserve
   const updateMeeting = async (id) => {
     await axios.put(`${endpoint}/hora/${id}`, {
-      horas: horario.horas,
+      horas: hora.horas,
       status: 2,
+    });
+    getAllMeetings();
+  };
+  const updateMeeting2 = async (horario) => {
+    await axios.put(`${endpoint}/hora/${horario.id}`, {
+      horas: horario.horas,
+      status: 1,
     });
     getAllMeetings();
   };
@@ -108,7 +115,10 @@ const Suppliers = () => {
           ></input>
         </div>
       </form>
-      <button className={classes.blackButton} onClick={() => updateMeeting()}>
+      <button
+        className={classes.blackButton}
+        onClick={() => updateMeeting(hora.id)}
+      >
         Reserve
       </button>
       <div className={classes.horario}>
@@ -125,7 +135,11 @@ const Suppliers = () => {
                 <td>{horario.horas} </td>
                 <td>{horario.status === 1 ? "Disponible" : "ocupado"} </td>
                 <td>
-                  {horario.status === 2 && <button>finalizar sesion</button>}
+                  {horario.status === 2 && (
+                    <button onClick={() => updateMeeting2(horario)}>
+                      finalizar sesion
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button onClick={() => deleteItem(horario.id)}>
