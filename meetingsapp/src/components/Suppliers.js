@@ -36,15 +36,16 @@ const Suppliers = () => {
     getElement = horario.find(
       (horario) => horario.horas === +initialValueInput.current.value
     );
+
     setHora(getElement);
-    if (hora) {
+    if (getElement) {
       console.log("tengo el elemento");
-      console.log(hora);
+      console.log(getElement);
+      console.log(getElement.id);
     } else {
       console.log("mo se armo");
     }
-    console.log("se encontro el elemento");
-    console.log(getElement.id);
+
     finalValueInput.current.value = +initialValueInput.current.value + 1;
     setMaxValue(+initialValueInput.current.value + 2);
     setMinValue(+initialValueInput.current.value + 1);
@@ -63,9 +64,9 @@ const Suppliers = () => {
   };
 
   //TODO: boton reserve
-  const updateMeeting = async () => {
-    await axios.put(`${endpoint}/hora/13`, {
-      horas: 19,
+  const updateMeeting = async (id) => {
+    await axios.put(`${endpoint}/hora/${id}`, {
+      horas: horario.horas,
       status: 2,
     });
     getAllMeetings();
@@ -107,7 +108,7 @@ const Suppliers = () => {
           ></input>
         </div>
       </form>
-      <button className={classes.blackButton} onClick={updateMeeting}>
+      <button className={classes.blackButton} onClick={() => updateMeeting()}>
         Reserve
       </button>
       <div className={classes.horario}>
