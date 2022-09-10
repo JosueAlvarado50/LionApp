@@ -53,7 +53,7 @@ const Suppliers = () => {
         setIsValid(false);
       }
     } else {
-      console.log("mo se armo");
+      console.log("surgio un error al caputurar el elemento del horario");
     }
 
     finalValueInput.current.value = +initialValueInput.current.value + 1;
