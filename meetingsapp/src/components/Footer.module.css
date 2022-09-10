@@ -1,33 +1,44 @@
 .footer {
   background-color: rgb(56, 52, 76);
   width: 100%;
-  height: 300px;
+  height: 100%;
 }
 .container {
   width: 65%;
   margin: 50px auto 0;
   display: table;
   box-sizing: border-box;
-  color: whitesmoke;
-  background-color: yellow;
 }
 .row {
   margin: 10px 0;
   border-spacing: 50px 5px;
-  background-color: red;
 }
+
 .column {
   display: table-cell;
   padding: 10px;
   width: 33.33333%;
   text-align: justify;
-  background-color: blue;
 
   line-height: 170%;
 }
+.column p {
+  color: grey;
+  margin-left: 60%;
+}
+.h4 {
+  color: whitesmoke;
+}
+.titleh4 {
+  color: whitesmoke;
+  margin-left: 60%;
+}
+.title2h4 {
+  color: whitesmoke;
+}
 .img {
-  width: 10%;
-  height: 10%;
+  width: 30px;
+  height: 30px;
   margin-right: 3%;
 }
 
@@ -37,4 +48,7 @@
 .parraf {
   text-align: center;
   font-size: 150%;
+}
+.copyRight p {
+  color: grey;
 }

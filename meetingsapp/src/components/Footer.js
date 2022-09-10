@@ -11,21 +11,21 @@ const Footer = () => {
       <div className={classes.container}>
         <div className={classes.row}>
           <div className={classes.column}>
-            <p>columna 1</p>
+            <h4 className={classes.h4}>Made by Josue Alvarado</h4>
             <img
               alt="logo-lions"
               src="https://www.lionintel.com/img/logo_lion.png"
             ></img>
           </div>
           <div className={classes.column}>
-            <p>COMPANY</p>
+            <h4 className={classes.titleh4}>COMPANY</h4>
             <p>Why Us</p>
             <p>About Us</p>
             <p>Contact Us</p>
             <p>Product & Services</p>
           </div>
           <div className={classes.column}>
-            <p>SOCIAL</p>
+            <h4 className={classes.title2h4}>SOCIAL</h4>
             <a href="https://www.facebook.com/Lionintel/">
               <img
                 className={classes.img}
@@ -46,6 +46,12 @@ const Footer = () => {
                 src={logoInsta}
               ></img>
             </a>
+          </div>
+          <div className={classes.copyRight}>
+            <p>
+              Copyright ©2022 All rights reserved | This template is made with ♡
+              by Colorlib
+            </p>
           </div>
         </div>
       </div>
