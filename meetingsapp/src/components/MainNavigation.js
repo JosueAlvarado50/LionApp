@@ -27,14 +27,7 @@ const MainNavigation = () => {
               Meeting
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/quotes"
-              className={(navData) => (navData.isActive ? classes.active : "")}
-            >
-              All Meetings
-            </NavLink>
-          </li>
+
           <li>
             <NavLink
               to="/new-quote"

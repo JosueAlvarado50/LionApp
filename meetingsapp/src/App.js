@@ -5,29 +5,36 @@ import SalaJuntas from "./components/Layout/SalaJuntas";
 import MainNavigation from "./components/MainNavigation";
 import AllMeeting from "./components/Pages/AllMeeting";
 import QuoteDetail from "./components/Pages/QuoteDetail";
+import classes from "./App.module.css";
 
 // usar rafce para crear componentes rapido
 function App() {
   return (
-    <div className="App">
-      <MainNavigation></MainNavigation>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate replace to={"/HomePage"}></Navigate>}
-        ></Route>
-        <Route path="/HomePage" element={<HomePage></HomePage>}>
-          {" "}
-        </Route>
-        <Route path="/meeting" element={<AllMeeting></AllMeeting>}>
-          {" "}
-        </Route>
-        <Route
-          path="/meeting/:meetingId"
-          element={<QuoteDetail></QuoteDetail>}
-        ></Route>
-      </Routes>
-      <Footer></Footer>
+    <div className={classes.app}>
+      <div className={classes.nav}>
+        <MainNavigation></MainNavigation>
+      </div>
+      <div className={classes.body}>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate replace to={"/HomePage"}></Navigate>}
+          ></Route>
+          <Route path="/HomePage" element={<HomePage></HomePage>}>
+            {" "}
+          </Route>
+          <Route path="/meeting" element={<AllMeeting></AllMeeting>}>
+            {" "}
+          </Route>
+          <Route
+            path="/meeting/:meetingId"
+            element={<QuoteDetail></QuoteDetail>}
+          ></Route>
+        </Routes>
+      </div>
+      <div className={classes.footer}>
+        <Footer></Footer>
+      </div>
     </div>
   );
 }

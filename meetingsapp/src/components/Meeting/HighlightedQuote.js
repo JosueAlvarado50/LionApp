@@ -19,16 +19,20 @@ const HighlightedQuote = (props) => {
   const nombreDia = dias[numeroDia];
   console.log("Nombre de día de la semana: ", nombreDia);
   return (
-    <figure className={classes.quote}>
-      <p>{props.text}</p>
+    <div>
+      <div className={classes.relleno}>relleno</div>
+      <figure className={classes.quote}>
+        <p>{props.text}</p>
 
-      <div>
-        <label className={classes.daylabel}>Dia:</label>
-        <label>{nombreDia} </label>
-        <label></label>
-        <Suppliers></Suppliers>
-      </div>
-    </figure>
+        <div>
+          <label className={classes.daylabel}>Dia:</label>
+          <label>{nombreDia} </label>
+          <label></label>
+          <Suppliers></Suppliers>
+        </div>
+      </figure>
+      <div className={classes.relleno2}></div>
+    </div>
   );
 };
 

@@ -25,6 +25,7 @@ const MeetingList = (props) => {
 
   return (
     <Fragment>
+      <div className={classes.relleno}>relleno</div>
       <ul className={classes.list}>
         {props.quotes.map((quote) => (
           <MeetingItem
@@ -35,6 +36,7 @@ const MeetingList = (props) => {
           />
         ))}
       </ul>
+      <div className={classes.relleno2}></div>
     </Fragment>
   );
 };
