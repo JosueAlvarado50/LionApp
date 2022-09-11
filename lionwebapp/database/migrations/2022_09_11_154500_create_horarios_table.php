@@ -14,9 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->id();
-            $table->integer('horas',2);
-            $table->integer('status', 2);
+            $table->engine="InnoDB";
+            $table->bigIncrements('id');
+            $table->integer('7');
+            $table->integer('8');
+            $table->integer('9');
+            $table->integer('10');
+            $table->integer('11');
+            $table->integer('12');
+            $table->integer('13');
+            $table->integer('14');
             $table->timestamps();
         });
     }

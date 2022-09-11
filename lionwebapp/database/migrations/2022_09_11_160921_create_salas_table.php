@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('salas', function (Blueprint $table) {
-            $table->id()->unsigned();
-            $table->string('nombre',40);
-            $table->string('autor',40);
-            $table->integer('status',2);
-            $table->integer('horario_id')->unsigned();
+            $table->engine="InnoDB";
+            $table->bigIncrements('id');
+            $table->string('nombre', 40);
+            $table->string('autor', 40);
+            $table->unsignedBigInteger('horario_id');
+            $table->foreign('horario_id')->references('id')->on('horarios')->onDelete("cascade");
             $table->timestamps();
         });
     }
