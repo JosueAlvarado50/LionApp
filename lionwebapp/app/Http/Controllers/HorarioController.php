@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\Horario;
 use Illuminate\Http\Request;
 
-/**
- * Class HorarioController
- * @package App\Http\Controllers
- */
 class HorarioController extends Controller
 {
     /**
@@ -18,92 +14,93 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        $horarios = Horario::paginate();
-
-        return view('horario.index', compact('horarios'))
-            ->with('i', (request()->input('page', 1) - 1) * $horarios->perPage());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $horario = new Horario();
-        return view('horario.create', compact('horario'));
-    }
+        //
+        $horarios = Horario::all();
+        return $horarios;
+        }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        
+    }
+
     public function store(Request $request)
     {
-        request()->validate(Horario::$rules);
-
-        $horario = Horario::create($request->all());
-
-        return redirect()->route('horarios.index')
-            ->with('success', 'Horario created successfully.');
+        //
+        $horario =  new Horario();
+        $horario->hora_7 =$request->hora_7;
+        $horario->hora_8 =$request->hora_8;
+        $horario->hora_9 =$request->hora_9;
+        $horario->hora_10 =$request->hora_10;
+        $horario->hora_11 =$request->hora_11;
+        $horario->hora_12 =$request->hora_12;
+        $horario->hora_13 =$request->hora_13;
+        $horario->hora_14 =$request->hora_14;
+        $horario->hora_15 =$request->hora_15;
+        $horario->save();
+       
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        //
         $horario = Horario::find($id);
-
         return view('horario.show', compact('horario'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $horario = Horario::find($id);
-
-        return view('horario.edit', compact('horario'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Horario $horario
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Horario $horario)
+    public function edit($id)
     {
-        request()->validate(Horario::$rules);
+       
+    }
 
-        $horario->update($request->all());
-
-        return redirect()->route('horarios.index')
-            ->with('success', 'Horario updated successfully');
+    public function update(Request $request, $id)
+    {
+        //
+        $horario= Horario::findOrFail($request->id);
+        $horario->hora_7 =$request->hora_7;
+        $horario->hora_8 =$request->hora_8;
+        $horario->hora_9 =$request->hora_9;
+        $horario->hora_10 =$request->hora_10;
+        $horario->hora_11 =$request->hora_11;
+        $horario->hora_12 =$request->hora_12;
+        $horario->hora_13 =$request->hora_13;
+        $horario->hora_14 =$request->hora_14;
+        $horario->hora_15 =$request->hora_15;
+        $horario->save();
+        return $horario;
+       
     }
 
     /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        //
         $horario = Horario::find($id)->delete();
-
-        return redirect()->route('horarios.index')
-            ->with('success', 'Horario deleted successfully');
+        return $horario;
     }
 }

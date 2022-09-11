@@ -1,14 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Sala;
 use Illuminate\Http\Request;
 
-/**
- * Class SalaController
- * @package App\Http\Controllers
- */
 class SalaController extends Controller
 {
     /**
@@ -18,92 +13,73 @@ class SalaController extends Controller
      */
     public function index()
     {
-        $salas = Sala::paginate();
-
-        return view('sala.index', compact('salas'))
-            ->with('i', (request()->input('page', 1) - 1) * $salas->perPage());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $sala = new Sala();
-        return view('sala.create', compact('sala'));
+        //
+        $salas = Sala::all();
+        return $salas;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        $sala = new Sala();
+        return $sala;
+    }
     public function store(Request $request)
     {
-        request()->validate(Sala::$rules);
-
-        $sala = Sala::create($request->all());
-
-        return redirect()->route('salas.index')
-            ->with('success', 'Sala created successfully.');
+        //
+        $sala = new Sala();
+        $sala->nombre =$request->nombre;
+        $sala->autor=$request->autor;
+        $sala->horario_id=$request->horario_id;
+        $sala->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        //
         $sala = Sala::find($id);
-
-        return view('sala.show', compact('sala'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $sala = Sala::find($id);
-
-        return view('sala.edit', compact('sala'));
+        return $sala;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Sala $sala
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function update(Request $request, Sala $sala)
     {
-        request()->validate(Sala::$rules);
-
-        $sala->update($request->all());
-
-        return redirect()->route('salas.index')
-            ->with('success', 'Sala updated successfully');
+        //
+       $sala = Sala::findOrFail($request->id);
+       $sala->nombre=$request->nombre;
+       $sala->autor=$request->autor;
+       $sala->save();
+       return $sala;
     }
 
     /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        //
         $sala = Sala::find($id)->delete();
-
-        return redirect()->route('salas.index')
-            ->with('success', 'Sala deleted successfully');
+        return $sala;
     }
 }

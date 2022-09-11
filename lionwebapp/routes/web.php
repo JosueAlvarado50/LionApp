@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
+Route::resource('salas', App\Http\Controllers\SalaController::class);
+Route::resource('horarios', App\Http\Controllers\HorarioController::class);
+*/
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

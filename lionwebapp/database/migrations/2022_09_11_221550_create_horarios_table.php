@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('horarios', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->bigIncrements('id');
-            $table->integer('7');
-            $table->integer('8');
-            $table->integer('9');
-            $table->integer('10');
-            $table->integer('11');
-            $table->integer('12');
-            $table->integer('13');
-            $table->integer('14');
+            $table->integer('hora_7');
+            $table->integer('hora_8');
+            $table->integer('hora_9');
+            $table->integer('hora_10');
+            $table->integer('hora_11');
+            $table->integer('hora_12');
+            $table->integer('hora_13');
+            $table->integer('hora_14');
             $table->timestamps();
         });
     }
