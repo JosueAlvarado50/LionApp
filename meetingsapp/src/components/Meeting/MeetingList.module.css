@@ -6,6 +6,23 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   padding: 8%;
 }
+.list button {
+  margin-top: 2%;
+  margin-bottom: 4%;
+  cursor: pointer;
+
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  font-style: none;
+  height: 40px;
+  width: 110px;
+  margin: 0 70%;
+}
+.list button:hover {
+  background-color: rgba(117, 117, 117, 255);
+  border: 0;
+}
 
 .relleno {
   width: 100%;

@@ -26,16 +26,19 @@ const MeetingList = (props) => {
   return (
     <Fragment>
       <div className={classes.relleno}>relleno</div>
-      <ul className={classes.list}>
-        {props.quotes.map((quote) => (
-          <MeetingItem
-            key={quote.id}
-            id={quote.id}
-            author={quote.author}
-            text={quote.text}
-          />
-        ))}
-      </ul>
+      <div className={classes.list}>
+        <ul>
+          {props.quotes.map((quote) => (
+            <MeetingItem
+              key={quote.id}
+              id={quote.id}
+              author={quote.author}
+              text={quote.text}
+            />
+          ))}
+        </ul>
+        <button>add new</button>
+      </div>
       <div className={classes.relleno2}></div>
     </Fragment>
   );
