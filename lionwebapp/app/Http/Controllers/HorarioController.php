@@ -57,7 +57,7 @@ class HorarioController extends Controller
     {
         //
         $horario = Horario::find($id);
-        return view('horario.show', compact('horario'));
+        return $horario;
     }
 
     /**

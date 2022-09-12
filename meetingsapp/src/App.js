@@ -6,6 +6,7 @@ import MainNavigation from "./components/MainNavigation";
 import AllMeeting from "./components/Pages/AllMeeting";
 import QuoteDetail from "./components/Pages/QuoteDetail";
 import classes from "./App.module.css";
+import MeetingList from "./components/Meeting/MeetingList";
 
 // usar rafce para crear componentes rapido
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path="/HomePage" element={<HomePage></HomePage>}>
             {" "}
           </Route>
-          <Route path="/meeting" element={<AllMeeting></AllMeeting>}>
+          <Route path="/meeting" element={<MeetingList></MeetingList>}>
             {" "}
           </Route>
           <Route
