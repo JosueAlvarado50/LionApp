@@ -15,8 +15,8 @@ class HorarioController extends Controller
     public function index()
     {
         //
-        $horarios = Horario::all();
-        return $horarios;
+        $horario = Horario::all();
+        return $horario;
         }
 
     /**
@@ -34,17 +34,16 @@ class HorarioController extends Controller
     {
         //
         $horario =  new Horario();
-        $horario->hora_7 =$request->hora_7;
-        $horario->hora_8 =$request->hora_8;
-        $horario->hora_9 =$request->hora_9;
-        $horario->hora_10 =$request->hora_10;
-        $horario->hora_11 =$request->hora_11;
-        $horario->hora_12 =$request->hora_12;
-        $horario->hora_13 =$request->hora_13;
-        $horario->hora_14 =$request->hora_14;
-        $horario->hora_15 =$request->hora_15;
+        $horario->hora_7 =1;
+        $horario->hora_8 =1;
+        $horario->hora_9 =1;
+        $horario->hora_10 =1;
+        $horario->hora_11 =1;
+        $horario->hora_12 =1;
+        $horario->hora_13 =1;
+        $horario->hora_14 =1;
+        $horario->hora_15 =1;
         $horario->save();
-       
         
     }
 

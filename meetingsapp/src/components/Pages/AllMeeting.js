@@ -2,6 +2,7 @@ import { useState } from "react";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import NoQuotesFound from "../Meeting/NoQuotesFound";
 import MeetingList from "../Meeting/MeetingList";
+const endpoint = "http://127.0.0.1:8000/api";
 
 const AllMeeting = () => {
   const meetingsArray = [
@@ -12,6 +13,7 @@ const AllMeeting = () => {
   const [status, setStatus] = useState("");
   const [error, setError] = useState(false);
   const [loadedQuotes, setloadedQuotes] = useState("");
+
   /* 
   if (status === "pending") {
     return (

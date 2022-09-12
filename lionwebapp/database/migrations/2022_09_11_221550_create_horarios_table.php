@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('hora_12');
             $table->integer('hora_13');
             $table->integer('hora_14');
+            $table->integer('hora_15');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Sala;
+use App\Models\Horario;
 use Illuminate\Http\Request;
 
 class SalaController extends Controller
@@ -30,12 +31,23 @@ class SalaController extends Controller
         return $sala;
     }
     public function store(Request $request)
-    {
+    {   
+        $horario = new Horario();
+        $horario->hora_7 =1;
+        $horario->hora_8 =1;
+        $horario->hora_9 =1;
+        $horario->hora_10 =1;
+        $horario->hora_11 =1;
+        $horario->hora_12 =1;
+        $horario->hora_13 =1;
+        $horario->hora_14 =1;
+        $horario->hora_15 =1;
+        $horario->save();
         //
         $sala = new Sala();
         $sala->nombre =$request->nombre;
         $sala->autor=$request->autor;
-        $sala->horario_id=$request->horario_id;
+        $sala->horario_id=$horario->id;
         $sala->save();
     }
 
