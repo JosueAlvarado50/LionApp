@@ -22,6 +22,7 @@ const HighlightedQuote = (props) => {
     <div>
       <div className={classes.relleno}>relleno</div>
       <figure className={classes.quote}>
+        <h4>{props.author} </h4>
         <p>{props.text}</p>
 
         <div>

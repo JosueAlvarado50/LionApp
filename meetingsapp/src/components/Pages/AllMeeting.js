@@ -7,6 +7,7 @@ const endpoint = "http://127.0.0.1:8000/api";
 
 const AllMeeting = () => {
   const [salas, setSalas] = useState([]);
+
   useEffect(() => {
     getAllMeetings();
   }, []);

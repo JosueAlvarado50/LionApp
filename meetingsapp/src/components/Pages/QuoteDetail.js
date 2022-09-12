@@ -1,27 +1,37 @@
-import { Fragment, useEffect } from "react";
+import axios from "axios";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useParams, Outlet } from "react-router-dom";
 import HighlightedQuote from "../Meeting/HighlightedQuote";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
+const endpoint = "http://127.0.0.1:8000/api";
+let sala = [];
 const QuoteDetail = () => {
   const params = useParams();
+  console.log("valord de paramas");
+  console.log(params);
+  const [loadedMeeting, setloadedMeeting] = useState([]);
+
+  const getAllMeetings = useCallback(async () => {
+    const response = await axios.get(`${endpoint}/sala/${params.meetingId}`);
+    sala = response.data;
+    setloadedMeeting(sala);
+    console.log(sala);
+  }, [params.meetingId]);
+
+  useEffect(() => {
+    getAllMeetings();
+  }, [getAllMeetings]);
 
   //TODO: se obtiene el id de la url para la meeting correspondiente
 
-  const meetingsArray = [
-    { id: "m1", author: "Josue Alvarado", text: "Meeting 1 Sala Principal" },
-    { id: "m2", author: "Josue Alvarado", text: "Meeting 2 Sala Secundaria" },
-  ];
   //TODO: Buscar en la DB la meeting con su id
-  const loadedMeeting = meetingsArray.filter(
-    (meeting) => meeting.id === params.meetingId
-  );
-  console.log(loadedMeeting);
+
   return (
     <Fragment>
       <HighlightedQuote
-        text={loadedMeeting[0].text}
-        author={loadedMeeting[0].author}
+        text={loadedMeeting.nombre}
+        author={loadedMeeting.autor}
       />
 
       <Outlet />
