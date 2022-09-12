@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import classes from "./Suppliers.module.css";
 import axios from "axios";
 
 const endpoint = "http://127.0.0.1:8000/api";
-
+let horario = [];
 const Suppliers = () => {
   const [enteredInitalDate, setEnteredInitalDate] = useState("");
   const [enteredFinalDate, setEnteredFinalDate] = useState("");
-  const [horario, setHorario] = useState([]);
   const [maxValue, setMaxValue] = useState("");
   const [minValue, setMinValue] = useState(8);
   const initialValueInput = useRef();
@@ -18,15 +17,13 @@ const Suppliers = () => {
   const [finalValue, setFinalValue] = useState();
   const [initialValue, setInitialValue] = useState();
 
+  const getAllMeetings = useCallback(async () => {
+    const response = await axios.get(`${endpoint}/horas`);
+    horario = response.data;
+  }, []);
   useEffect(() => {
     getAllMeetings();
-  }, []);
-
-  const getAllMeetings = async () => {
-    const response = await axios.get(`${endpoint}/horas`);
-    setHorario(response.data);
-    console.log("response get con axios");
-  };
+  }, [getAllMeetings]);
 
   let getElement = [];
   //TODO: cuando se selecciona una hora

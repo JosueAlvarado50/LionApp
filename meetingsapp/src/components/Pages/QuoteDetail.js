@@ -6,17 +6,15 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 
 const endpoint = "http://127.0.0.1:8000/api";
 let sala = [];
+
 const QuoteDetail = () => {
   const params = useParams();
-  console.log("valord de paramas");
-  console.log(params);
   const [loadedMeeting, setloadedMeeting] = useState([]);
 
   const getAllMeetings = useCallback(async () => {
     const response = await axios.get(`${endpoint}/sala/${params.meetingId}`);
     sala = response.data;
     setloadedMeeting(sala);
-    console.log(sala);
   }, [params.meetingId]);
 
   useEffect(() => {
@@ -30,10 +28,9 @@ const QuoteDetail = () => {
   return (
     <Fragment>
       <HighlightedQuote
-        text={loadedMeeting.nombre}
-        author={loadedMeeting.autor}
+        nombre={loadedMeeting.nombre}
+        autor={loadedMeeting.autor}
       />
-
       <Outlet />
     </Fragment>
   );

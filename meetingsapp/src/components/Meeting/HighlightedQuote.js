@@ -17,13 +17,13 @@ const HighlightedQuote = (props) => {
   ];
   const numeroDia = new Date(fechaComoCadena).getDay();
   const nombreDia = dias[numeroDia];
-  console.log("Nombre de día de la semana: ", nombreDia);
+
   return (
     <div>
       <div className={classes.relleno}>relleno</div>
       <figure className={classes.quote}>
-        <h4>{props.author} </h4>
-        <p>{props.text}</p>
+        <h4>{props.autor} </h4>
+        <p>{props.nombre}</p>
 
         <div>
           <label className={classes.daylabel}>Dia:</label>
