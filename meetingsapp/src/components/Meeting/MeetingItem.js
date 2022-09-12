@@ -7,9 +7,9 @@ const MeetingItem = (props) => {
     <li className={classes.item}>
       <figure>
         <blockquote>
-          <p>{props.text}</p>
+          <p>{props.nombre}</p>
         </blockquote>
-        <figcaption>{props.author}</figcaption>
+        <figcaption>{props.autor}</figcaption>
       </figure>
       <Link className="btn" to={`/meeting/${props.id}`}>
         book a Meeting

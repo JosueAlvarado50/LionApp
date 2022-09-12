@@ -1,34 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import NoQuotesFound from "../Meeting/NoQuotesFound";
 import MeetingList from "../Meeting/MeetingList";
+import axios from "axios";
 const endpoint = "http://127.0.0.1:8000/api";
 
 const AllMeeting = () => {
-  const meetingsArray = [
-    { id: "m1", author: "Josue Alvarado", text: "Meeting 1 Sala Principal" },
-    { id: "m2", author: "Josue Alvarado", text: "Meeting 2 Sala Secundaria" },
-  ];
+  const [salas, setSalas] = useState([]);
+  useEffect(() => {
+    getAllMeetings();
+  }, []);
 
-  const [status, setStatus] = useState("");
-  const [error, setError] = useState(false);
-  const [loadedQuotes, setloadedQuotes] = useState("");
+  const getAllMeetings = async () => {
+    const response = await axios.get(`${endpoint}/salas`);
+    setSalas(response.data);
+    console.log("response get con axios");
+  };
 
-  /* 
-  if (status === "pending") {
-    return (
-      <div className="centered">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-  if (error) {
-    return <p className="centered focused">{error}</p>;
-  }
-  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
-    return <NoQuotesFound />;
-  }
-*/
-  return <MeetingList quotes={meetingsArray} />;
+  return <MeetingList quotes={salas} />;
 };
 export default AllMeeting;

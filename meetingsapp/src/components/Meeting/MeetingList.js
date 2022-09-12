@@ -5,16 +5,6 @@ import MeetingItem from "./MeetingItem";
 import QuoteItem from "./MeetingItem";
 import classes from "./MeetingList.module.css";
 
-const sortQuotes = (quotes, ascending) => {
-  return quotes.sort((quoteA, quoteB) => {
-    if (ascending) {
-      return quoteA.id > quoteB.id ? 1 : -1;
-    } else {
-      return quoteA.id < quoteB.id ? 1 : -1;
-    }
-  });
-};
-
 const MeetingList = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,8 +22,8 @@ const MeetingList = (props) => {
             <MeetingItem
               key={quote.id}
               id={quote.id}
-              author={quote.author}
-              text={quote.text}
+              nombre={quote.nombre}
+              autor={quote.autor}
             />
           ))}
         </ul>
