@@ -15,15 +15,16 @@ const Suppliers = () => {
   const initialValueInput = useRef();
   const finalValueInput = useRef();
   const [hora, setHora] = useState([]);
-  const [inicialValueIsValid, setInitialValueIsValid] = useState(false);
+  const [inicialValueIsValid, setInitialValueIsValid] = useState(null);
+  const [inicialValueIsValid2, setInitialValueIsValid2] = useState(true);
   const [finalValueIsValid, setFinalValueIsValid] = useState(true);
   const [finalValue, setFinalValue] = useState();
   const [initialValue, setInitialValue] = useState();
-  const [horario, setHorario2] = useState([]);
+  const [horario, setHorario] = useState([]);
 
   const getAllMeetings = useCallback(async () => {
     const response = await axios.get(`${endpoint}/horario/${params.meetingId}`);
-    setHorario2(response.data);
+    setHorario(response.data);
   }, [params.meetingId]);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Suppliers = () => {
       `${endpoint}/horario/${params.meetingId}`,
       horario
     );
-    setHorario2(response.data);
+    setHorario(response.data);
   }, [params.meetingId, horario]);
 
   //!------------------------
@@ -45,6 +46,7 @@ const Suppliers = () => {
   const initialInputChange = () => {
     console.log(initialValueInput.current.value);
     initialhr = initialValueInput.current.value;
+    //finalValueInput.current.value = +initialValueInput.current.value + 1;
     console.log("Estado inicial: " + initialhr);
     console.log(horario);
     //TODO:se obtiene el valor 1 o 2 para saber si esta disponible la sala
@@ -54,12 +56,14 @@ const Suppliers = () => {
     if (statusHoraInicial === 1) {
       console.log("Esta Disponible la sala de la hora inicial");
       setInitialValueIsValid(true);
+      setInitialValueIsValid2(true);
 
       //!si se cambia de manera local pero falta actualizar la base
       //horario[`hora_${initialValueInput.current.value}`] = 2;
     } else {
       console.log("Se encuentra ocupada la sala de la hora inicial");
       setInitialValueIsValid(false);
+      setInitialValueIsValid2(false);
     }
 
     console.log(horario);
@@ -78,13 +82,13 @@ const Suppliers = () => {
     console.log(horario[`hora_${finalValueInput.current.value}`]);
     if (statusHoraFinal === 1) {
       console.log("Esta Disponible la sala de la hora final");
-      setInitialValueIsValid(true);
+      setFinalValueIsValid(true);
       console.log("se cambia a 2 de ocupado");
       //!si se cambia de manera local pero falta actualizar la base
       //horario[`hora_${finalValueInput.current.value}`] = 2;
     } else {
       console.log("Se encuentra ocupada la sala de la hora final");
-      setInitialValueIsValid(false);
+      setFinalValueIsValid(false);
     }
   };
 
@@ -104,6 +108,7 @@ const Suppliers = () => {
     event.preventDefault();
     if (inicialValueIsValid && finalValueIsValid) {
       console.log("se puede hacer la reservacion!");
+
       if (finalValueInput.current.value === "") {
         //!falta actualizar la base de datos
         console.log("hora inicial seteada safistactoriamente");
@@ -111,12 +116,44 @@ const Suppliers = () => {
         setOneMeeting();
         console.log(horario);
         setInitialValueIsValid(false);
+        setInitialValueIsValid2(false);
+        setFinalValueIsValid(false);
+        initialValueInput.current.value = "";
       } else {
         //!falta actualizar la base de datos
-        horario[`hora_${initialValueInput.current.value}`] = 2;
-        horario[`hora_${finalValueInput.current.value}`] = 2;
+        const resta =
+          finalValueInput.current.value - initialValueInput.current.value;
+        if (resta < 2) {
+          horario[`hora_${initialValueInput.current.value}`] = 2;
+          setInitialValueIsValid(false);
+          setInitialValueIsValid2(false);
+          setFinalValueIsValid(false);
+          initialValueInput.current.value = "";
+        } else {
+          horario[`hora_${initialValueInput.current.value}`] = 2;
+          setInitialValueIsValid(false);
+          setInitialValueIsValid2(false);
+          initialValueInput.current.value = "";
+          horario[`hora_${finalValueInput.current.value - 1}`] = 2;
+          setFinalValueIsValid(false);
+          finalValueInput.current.value = "";
+        }
+
+        console.log("hora inicial y final seteada safistactoriamente");
+        setOneMeeting();
+        finalValueInput.current.value = "";
       }
     }
+  };
+
+  const endTimeHandler = (hora) => {
+    console.log("se dio Click en eliminar");
+    horario[`hora_${hora}`] = 1;
+    console.log(horario);
+    setHorario(horario);
+    setOneMeeting();
+    initialValueInput.current.value = "";
+    finalValueInput.current.value = "";
   };
 
   //TODO: boton reserve
@@ -144,11 +181,16 @@ const Suppliers = () => {
           ></input>
         </div>
       </form>
-      {inicialValueIsValid && finalValueIsValid && (
-        <button className={classes.blackButton} onClick={reserveClickHandler}>
-          Reserve
-        </button>
-      )}
+      <div className={classes.reserve}>
+        {!inicialValueIsValid2 && (
+          <label>La hora solicitada no se encuentra disponible!</label>
+        )}
+        {inicialValueIsValid && finalValueIsValid && (
+          <button className={classes.blackButton} onClick={reserveClickHandler}>
+            Reserve
+          </button>
+        )}
+      </div>
 
       <div className={classes.horario}>
         <table>
@@ -163,90 +205,99 @@ const Suppliers = () => {
               <td>hora_7</td>
               <td>{horario.hora_7 === 1 ? "Disponible" : "Ocupada"}</td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_7 === 2 && (
+                  <button onClick={() => endTimeHandler(`7`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_8</td>
               <td>{horario.hora_8 === 1 ? "Disponible" : "Ocupada"}</td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_8 === 2 && (
+                  <button onClick={() => endTimeHandler(`8`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_9</td>
               <td>{horario.hora_9 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_9 === 2 && (
+                  <button onClick={() => endTimeHandler(`9`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_10</td>
               <td>{horario.hora_10 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar</button>
-              </td>
-              <td>
-                <button>eliminar</button>
+                {horario.hora_10 === 2 && (
+                  <button onClick={() => endTimeHandler(`10`)}>
+                    finalizar
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_11</td>
               <td>{horario.hora_11 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_11 === 2 && (
+                  <button onClick={() => endTimeHandler(`11`)}>
+                    finalizar
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_12</td>
               <td>{horario.hora_12 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_12 === 2 && (
+                  <button onClick={() => endTimeHandler(`12`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_13</td>
               <td>{horario.hora_13 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_13 === 2 && (
+                  <button onClick={() => endTimeHandler(`13`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_14</td>
               <td>{horario.hora_14 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_14 === 2 && (
+                  <button onClick={() => endTimeHandler(`14`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
               <td>hora_15</td>
               <td>{horario.hora_15 === 1 ? "Disponible" : "Ocupada"} </td>
               <td>
-                <button>finalizar </button>
-              </td>
-              <td>
-                <button>eliminar </button>
+                {horario.hora_15 === 2 && (
+                  <button onClick={() => endTimeHandler(`15`)}>
+                    finalizar{" "}
+                  </button>
+                )}
               </td>
             </tr>
           </tbody>

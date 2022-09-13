@@ -1,0 +1,51 @@
+.background {
+  width: 30%;
+  height: 450px;
+  margin: 0 auto;
+
+  margin-bottom: 5%;
+}
+.relleno {
+  width: 100%;
+  height: 170px;
+}
+.form {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+
+.form input {
+  border-radius: 25px;
+  height: 70%;
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+}
+.form input:hover {
+  background-color: black;
+  color: whitesmoke;
+}
+.addButton {
+  margin: 0 40%;
+  margin-top: 35%;
+}
+.button {
+  margin-bottom: 4%;
+  cursor: pointer;
+
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  font-style: none;
+  height: 40px;
+  width: 110px;
+}
+.button:hover {
+  background-color: rgba(117, 117, 117, 255);
+  border: 0;
+}
+.relleno2 {
+  width: 100%;
+  height: 50px;
+}

@@ -30,7 +30,7 @@ const MainNavigation = () => {
 
           <li>
             <NavLink
-              to="/new-quote"
+              to="/newMeeting"
               className={(navData) => (navData.isActive ? classes.active : "")}
             >
               Add a Meeting

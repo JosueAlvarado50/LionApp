@@ -11,6 +11,7 @@ const MeetingItem = (props) => {
         </blockquote>
         <figcaption>{props.autor}</figcaption>
       </figure>
+
       <Link className="btn" to={`/meeting/${props.id}`}>
         book a Meeting
       </Link>

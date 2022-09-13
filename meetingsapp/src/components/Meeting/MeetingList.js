@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Fragment, useCallback, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import MeetingItem from "./MeetingItem";
 
 import QuoteItem from "./MeetingItem";
@@ -41,7 +41,6 @@ const MeetingList = () => {
             />
           ))}
         </ul>
-        <button>add new</button>
       </div>
       <div className={classes.relleno2}></div>
     </Fragment>

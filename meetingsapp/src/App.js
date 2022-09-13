@@ -7,6 +7,7 @@ import AllMeeting from "./components/Pages/AllMeeting";
 import QuoteDetail from "./components/Pages/QuoteDetail";
 import classes from "./App.module.css";
 import MeetingList from "./components/Meeting/MeetingList";
+import NewMeeting from "./components/Pages/NewMeeting";
 
 // usar rafce para crear componentes rapido
 function App() {
@@ -31,6 +32,7 @@ function App() {
             path="/meeting/:meetingId"
             element={<QuoteDetail></QuoteDetail>}
           ></Route>
+          <Route path="/newMeeting" element={<NewMeeting></NewMeeting>}></Route>
         </Routes>
       </div>
       <div className={classes.footer}>
