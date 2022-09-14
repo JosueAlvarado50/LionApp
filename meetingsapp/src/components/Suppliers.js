@@ -303,7 +303,6 @@ const Suppliers = () => {
           </tbody>
         </table>
       </div>
-      <button className={classes.blackButton}>add new</button>
     </div>
   );
 };
